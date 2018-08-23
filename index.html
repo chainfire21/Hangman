@@ -12,34 +12,65 @@
 </head>
 
 <body>
-    <!-- Header -->
     <div class="container">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4 text-center">Guess the Word!</h1>
+        <div id="whatDiff">
+            <div class="row">
+                <div class="jumbotron jumbotron-fluid w-100">
+                    <div class="container">
+                        <h1 class="display-4 text-center">Welcome to Hangman!<br> Choose your difficulty:</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- Difficulty Option -->
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-secondary btn-lg m-1" onclick="easyDiff()">Easy</button>
+                <button type="button" class="btn btn-secondary btn-lg m-1" onclick="normalDiff()">Normal</button>
+                <button type="button" class="btn btn-secondary btn-lg m-1" onclick="hardDiff()">Hard</button>
             </div>
         </div>
 
-        <div>
-            <p id = "blankSpaces" class="lead text-center">
-                _ _ _ _ _
-            </p>
-        </div>
-        <div class="row justify-content-around">
-            <p class="col lead text-center">
-                Wins: <span id="wins">0</span>
-            </p>
-            <p class="col lead text-center">
+
+        <div id="diffChosen" class="d-none">
+            <!-- Heading -->
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center" id="diffTitle"></h1>
+                </div>
+            </div>
+
+            <div>
+                <p id="blankSpaces" class="lead text-center">
+                    _ _ _ _ _
+                </p>
+            </div>
+
+            <!-- Wins/Losses/Lives -->
+            <div class="row justify-content-around">
+                <p class="col lead text-center">
+                    Wins: <span id="wins">0</span>
+                </p>
+                <p class="col lead text-center">
                     Lives: <span id="lives">5</span>
                 </p>
-            <p class="col lead text-center">
-                Losses: <span id="losses">0</span>
-            </p>
+                <p class="col lead text-center">
+                    Losses: <span id="losses">0</span>
+                </p>
+            </div>
+
+            <!-- Previous Word -->
+            <div class="row">
+                <p class="col lead text-center">
+                    Previous word: <span id="prevWord"> N/A</span>
+                </p>
+            </div>
+            <div class="row">
+                <p class="col lead text-center">
+                    Guessed letters: <span id="guessedLetters"></span>
+                </p>
+            </div>
+
         </div>
-
-
     </div>
-
     <!-- Javascript Linking -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -47,7 +78,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        <script src="./assets/javascript/logic.js"></script>
+    <script src="./assets/javascript/logic.js"></script>
 </body>
 
 </html>
