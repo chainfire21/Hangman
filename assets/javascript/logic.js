@@ -1,5 +1,4 @@
 var wordArray = [];
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var guessArray = [];
 var correct;
 var randNum;
@@ -8,36 +7,33 @@ var winCount = 0;
 var lossCount = 0;
 var lives;
 var guessedLetters = [];
+var difficulty;
 
-
-document.addEventListener("keypress", function (event) {
+document.onkeyup = function (event) {
     var keyName = event.key.toLowerCase();
     correct = false;
-    // Loop to make sure a-z
-    for (i = 0; i < alphabet.length; i++) {
-        if (keyName === alphabet[i]) {
-            // loop to see if letter matches a letter in the word
-            for (j = 0; j < currentWord.length; j++) {
-                // check to see if its in the word
-                if (keyName === currentWord.charAt(j)) {
-                    guessArray[j] = keyName;
-                    correct = true;
-                }
-
+    // Make sure a-z
+    console.log(event.keyCode);
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+        // loop to see if letter matches a letter in the word
+        for (j = 0; j < currentWord.length; j++) {
+            if (keyName === currentWord.charAt(j)) {
+                guessArray[j] = keyName;
+                correct = true;
             }
         }
-    }
-    // check to see if its been guessed before
-    for (x = 0; x < guessedLetters.length; x++) {
-        if (guessedLetters[x] === keyName) {
-            correct = true;
+        // check to see if its been guessed before
+        for (x = 0; x < guessedLetters.length; x++) {
+            if (guessedLetters[x] === keyName) {
+                correct = true;
+            }
         }
+        if (!correct)
+            guessedLetters.push(keyName);
+        updateGuess();
+        checkWin();
     }
-    if (!correct)
-        guessedLetters.push(keyName);
-    updateGuess();
-    checkWin();
-});
+}
 
 
 
@@ -59,8 +55,6 @@ function initialSetup() {
             break;
     }
     document.getElementById("lives").innerHTML = lives;
-    console.log(currentWord);
-    console.log(currentWord.length);
     for (i = 0; i < currentWord.length; i++) {
         if (currentWord[i] === " ") {
             guessArray.push("&nbsp;  ");
@@ -70,8 +64,8 @@ function initialSetup() {
         }
     }
     document.getElementById("blankSpaces").innerHTML = guessArray.join("");
-    console.log("Initial setup guess array: ");
-    console.log(guessArray);
+    document.getElementById("wins").innerHTML = winCount;
+    document.getElementById("losses").innerHTML = lossCount;
 }
 
 function updateGuess() {
@@ -104,6 +98,29 @@ function checkWin() {
     }
 }
 
+function menu() {
+    switch (difficulty) {
+        case "e":
+            document.getElementById("easyScores").innerHTML = "W- " + winCount + " L- " + lossCount;
+            winCount = 0;
+            lossCount = 0;
+            break;
+        case "n":
+            document.getElementById("normalScores").innerHTML = "W- " + winCount + " L- " + lossCount;
+            winCount = 0;
+            lossCount = 0;
+            break;
+        case "h":
+            document.getElementById("hardScores").innerHTML = "W- " + winCount + " L- " + lossCount;
+            winCount = 0;
+            lossCount = 0;
+            break;
+    }
+    document.getElementById("whatDiff").style.display = "block";
+    document.getElementById("diffChosen").classList.add("d-none");
+    document.getElementById("prevWord").innerHTML = "N/A";
+}
+
 function easyDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
@@ -112,6 +129,7 @@ function easyDiff() {
     difficulty = "e";
     initialSetup();
 }
+
 function normalDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
@@ -120,6 +138,7 @@ function normalDiff() {
     difficulty = "n";
     initialSetup();
 }
+
 function hardDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
@@ -127,6 +146,4 @@ function hardDiff() {
     wordArray = ["adult dragon", "ancient dragon", "avatar of death", "beholder zombie", "bone devil", "death knight", "fire elemental", "winged kobold", "umber hulk", "drow priestess", "stone golem", "pit fiend"];
     difficulty = "h";
     initialSetup();
-
 }
-

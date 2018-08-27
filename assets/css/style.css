@@ -1,0 +1,51 @@
+.dndClasses{
+    background-image: url(../images/Webp.net-resizeimage\ \(1\).jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+.dndSpells{
+    background-image: url(../images/Webp.net-resizeimage\ \(2\).jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+.dndMonsters{
+    background-image: url(../images/Webp.net-resizeimage\ \(3\).jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+.border-dark{
+    border-width: 0.2rem;
+}
+
+.jumbotron{
+    background-color: transparent;
+}
+
+.card-body {
+    padding: 30% 5%;
+}
+
+body {
+    background-image: url(../images/dndbackgorund.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;    
+    color: #fff;
+}
+
+.card {
+    background-color: transparent;
+    border: none;
+}
+
+.lead{
+    font-size: 25px;
+}
+
+#blankSpaces{
+    font-size:35px;
+}
+
+.high-scores{
+    padding:0;
+    margin-top: 1rem;
+}
