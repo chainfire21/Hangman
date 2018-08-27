@@ -12,9 +12,11 @@ var difficulty;
 document.onkeyup = function (event) {
     var keyName = event.key.toLowerCase();
     correct = false;
+
     // Make sure a-z
     console.log(event.keyCode);
     if (event.keyCode >= 65 && event.keyCode <= 90) {
+
         // loop to see if letter matches a letter in the word
         for (j = 0; j < currentWord.length; j++) {
             if (keyName === currentWord.charAt(j)) {
@@ -36,25 +38,29 @@ document.onkeyup = function (event) {
 }
 
 
-
+//generate words to guess and guess array
 function initialSetup() {
     randNum = Math.floor(Math.random() * wordArray.length);
     currentWord = wordArray[randNum];
     guessArray = [];
     guessedLetters = [];
     document.getElementById("guessedLetters").innerHTML = guessedLetters;
+
+    //reset lives based on difficulty
     switch (difficulty) {
         case "e":
             lives = 4;
             break;
         case "n":
-            lives = 6;
+            lives = 5;
             break;
         case "h":
-            lives = 8;
+            lives = 6;
             break;
     }
     document.getElementById("lives").innerHTML = lives;
+
+    //generate array with _ for the word
     for (i = 0; i < currentWord.length; i++) {
         if (currentWord[i] === " ") {
             guessArray.push("&nbsp;  ");
@@ -63,27 +69,36 @@ function initialSetup() {
             guessArray.push("_ ");
         }
     }
+
+    //show scores and how many blanks
     document.getElementById("blankSpaces").innerHTML = guessArray.join("");
     document.getElementById("wins").innerHTML = winCount;
     document.getElementById("losses").innerHTML = lossCount;
 }
 
+//update html for guessed array and letters of words
 function updateGuess() {
     document.getElementById("blankSpaces").innerHTML = guessArray.join("");
     document.getElementById("guessedLetters").innerHTML = guessedLetters.join(", ");
 }
 
+//see if won or lost
 function checkWin() {
     var isGuessed = true;
     if (!correct) {
         lives--;
     }
     document.getElementById("lives").innerHTML = lives;
+
+    //check to see if guess Array has a _
     for (i = 0; i < guessArray.length; i++) {
         if (guessArray[i] === "_ ") {
             isGuessed = false;
         }
     }
+
+    //update based on if won or lost
+
     if (isGuessed) {
         winCount++;
         document.getElementById("wins").innerHTML = winCount;
@@ -98,7 +113,10 @@ function checkWin() {
     }
 }
 
+//go back to menu, update high scores
 function menu() {
+
+    //move values depending on difficulty
     switch (difficulty) {
         case "e":
             document.getElementById("easyScores").innerHTML = "W- " + winCount + " L- " + lossCount;
@@ -121,6 +139,7 @@ function menu() {
     document.getElementById("prevWord").innerHTML = "N/A";
 }
 
+//choose easy diff with easy array
 function easyDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
@@ -130,6 +149,7 @@ function easyDiff() {
     initialSetup();
 }
 
+//choose normal diff with normal array
 function normalDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
@@ -139,6 +159,7 @@ function normalDiff() {
     initialSetup();
 }
 
+//choose hard diff with hard array
 function hardDiff() {
     document.getElementById("whatDiff").style.display = "none";
     document.getElementById("diffChosen").classList.remove("d-none");
