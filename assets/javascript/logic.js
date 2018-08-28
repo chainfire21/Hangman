@@ -14,7 +14,6 @@ document.onkeyup = function (event) {
     correct = false;
 
     // Make sure a-z
-    console.log(event.keyCode);
     if (event.keyCode >= 65 && event.keyCode <= 90) {
 
         // loop to see if letter matches a letter in the word
